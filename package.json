@@ -1,0 +1,27 @@
+{
+  "name": "barcode-get-binary-sections",
+  "version": "1.0.0",
+  "description": "Returns the sections of a binary barcode",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agarrharr/barcode-get-binary-sections.git"
+  },
+  "keywords": [
+    "barcode",
+    "binary"
+  ],
+  "author": "Adam Harris",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/agarrharr/barcode-get-binary-sections/issues"
+  },
+  "homepage": "https://github.com/agarrharr/barcode-get-binary-sections#readme",
+  "devDependencies": {
+    "ava": "^0.21.0",
+    "xo": "^0.18.2"
+  }
+}
