@@ -7,7 +7,7 @@ const CENTER_LENGTH = 5;
 const NUMBER_LENGTH = 7;
 const CENTER_INDEX = END_LENGTH + 6 * NUMBER_LENGTH;
 
-const isEvenParity = string => string.split('').reduce((a, c) => Boolean(Number(c)) ? !a: a, true);
+const isEvenParity = s => s.split('').reduce((a, c) => Boolean(Number(c)) ? !a: a, true);
 const reverseString = s => s.split('').reverse().join('');
 
 const findAllMatches = (s, search) => {
@@ -24,20 +24,20 @@ const findAllMatches = (s, search) => {
 	return result;
 }
 
-const getCenterGuardIndex = string => {
-	const centerGuardIndexes = findAllMatches(string, CENTER_PATTERN);
-	const hasLeft = string.slice(0, END_LENGTH) === '101';
-	const hasRight = string.slice(string.length - END_LENGTH, string.length) === '101';
+const getCenterGuardIndex = s => {
+	const centerGuardIndexes = findAllMatches(s, CENTER_PATTERN);
+	const hasLeft = s.slice(0, END_LENGTH) === '101';
+	const hasRight = s.slice(s.length - END_LENGTH, s.length) === '101';
 
 	return (hasLeft && centerGuardIndexes.includes(CENTER_INDEX)) ?  CENTER_INDEX :
-		(hasRight && centerGuardIndexes.includes(string.length - CENTER_INDEX - CENTER_LENGTH)) ?  string.length - CENTER_INDEX - CENTER_LENGTH : -1;
+		(hasRight && centerGuardIndexes.includes(s.length - CENTER_INDEX - CENTER_LENGTH)) ?  s.length - CENTER_INDEX - CENTER_LENGTH : -1;
 }
 
-const getIsBackwards = (string, centerGuardIndex) => {
-	const numberBeforeCenterGuard = string.slice(centerGuardIndex - NUMBER_LENGTH, centerGuardIndex);
-	const numberAfterCenterGuard = string.slice(centerGuardIndex + CENTER_LENGTH, centerGuardIndex + CENTER_LENGTH + NUMBER_LENGTH);
+const getIsBackwards = (s, centerGuardIndex) => {
+	const numberBeforeCenterGuard = s.slice(centerGuardIndex - NUMBER_LENGTH, centerGuardIndex);
+	const numberAfterCenterGuard = s.slice(centerGuardIndex + CENTER_LENGTH, centerGuardIndex + CENTER_LENGTH + NUMBER_LENGTH);
 	return ((0 < centerGuardIndex - NUMBER_LENGTH && isEvenParity(numberBeforeCenterGuard)) ||
-		(string.length > centerGuardIndex + CENTER_LENGTH + NUMBER_LENGTH && !isEvenParity(numberAfterCenterGuard)));
+		(s.length > centerGuardIndex + CENTER_LENGTH + NUMBER_LENGTH && !isEvenParity(numberAfterCenterGuard)));
 };
 
 const getNumbers = (hasLeftHandGuard, hasRightHandGuard, centerGuardIndex, s) =>
@@ -55,7 +55,7 @@ const binary = string => {
 	const s = isBackwards ? reverseString(string) : string;
 	const centerGuardIndex = isBackwards ? s.length - originalCenterGuardIndex - CENTER_LENGTH : originalCenterGuardIndex;
 	const hasLeftHandGuard = s.slice(0, END_LENGTH) === END_PATTERN && centerGuardIndex === CENTER_INDEX;
-	const hasRightHandGuard = s.slice(string.length - END_LENGTH, string.length) === END_PATTERN && centerGuardIndex === string.length - CENTER_INDEX - CENTER_LENGTH;
+	const hasRightHandGuard = s.slice(s.length - END_LENGTH, s.length) === END_PATTERN && centerGuardIndex === s.length - CENTER_INDEX - CENTER_LENGTH;
 	const numbers = getNumbers(hasLeftHandGuard, hasRightHandGuard, centerGuardIndex, s);
 
 	return {
