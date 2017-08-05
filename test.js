@@ -9,7 +9,6 @@ test(t => {
 			centerGuard: '01010',
 			rightNumbers: ['1110010', '1100110', '1101100', '1001110', '1100110', '1000100'],
 			rightHandGuard: '101',
-			isBackwards: false
 		});
 
 	t.deepEqual(m('10100011010110001001100100011010001101000110101010'),
@@ -19,7 +18,6 @@ test(t => {
 			centerGuard: '01010',
 			rightNumbers: [],
 			rightHandGuard: '010',
-			isBackwards: false
 		});
 
 	t.deepEqual(m('1010001101011000100110010001101000110100011010'),
@@ -29,7 +27,6 @@ test(t => {
 			centerGuard: '0',
 			rightNumbers: [],
 			rightHandGuard: '010',
-			isBackwards: false
 		});
 
 	t.deepEqual(m('101000110101100010011001000110100011010001101'),
@@ -39,7 +36,6 @@ test(t => {
 			centerGuard: '',
 			rightNumbers: [],
 			rightHandGuard: '101',
-			isBackwards: false
 		});
 
 	t.deepEqual(m('101000110101100010011001000110100011010'),
@@ -49,7 +45,6 @@ test(t => {
 			centerGuard: '',
 			rightNumbers: [],
 			rightHandGuard: '010',
-			isBackwards: false
 		});
 
 	t.deepEqual(m('1010001101011000100110010001101000110'),
@@ -59,7 +54,6 @@ test(t => {
 			centerGuard: '',
 			rightNumbers: [],
 			rightHandGuard: '110',
-			isBackwards: false
 		});
 
 	t.deepEqual(m('101'),
@@ -69,7 +63,6 @@ test(t => {
 			centerGuard: '',
 			rightNumbers: [],
 			rightHandGuard: '101',
-			isBackwards: false
 		});
 
 	t.deepEqual(m('1'),
@@ -79,7 +72,6 @@ test(t => {
 			centerGuard: '',
 			rightNumbers: [],
 			rightHandGuard: '1',
-			isBackwards: false
 		});
 
 	t.deepEqual(m(''),
@@ -89,6 +81,15 @@ test(t => {
 			centerGuard: '',
 			rightNumbers: [],
 			rightHandGuard: '',
-			isBackwards: false
+		});
+
+	// Make it backwards
+	t.deepEqual(m('10100100010110011011100100110110110011010011101010101100010110001011000100110010001101011000101'),
+		{
+			leftHandGuard: '101',
+			leftNumbers: ['0001101', '0110001', '0011001', '0001101', '0001101', '0001101'],
+			centerGuard: '01010',
+			rightNumbers: ['1110010', '1100110', '1101100', '1001110', '1100110', '1000100'],
+			rightHandGuard: '101',
 		});
 });
