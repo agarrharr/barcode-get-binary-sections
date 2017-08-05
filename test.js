@@ -17,7 +17,6 @@ test(t => {
 			leftNumbers: ['0001101', '0110001', '0011001', '0001101', '0001101', '0001101'],
 			rightNumbers: ['1110010', '1100110', '1101100', '1001110', '1100110', '1000100'],
 			hasLeftHandGuard: true,
-			hasCenterGuard: true,
 			hasRightHandGuard: true,
 			isBackwards: false
 		});
@@ -28,7 +27,6 @@ test(t => {
 			leftNumbers: ['0001101', '0110001', '0011001', '0001101', '0001101', '0001101'],
 			rightNumbers: ['10'],
 			hasLeftHandGuard: true,
-			hasCenterGuard: true,
 			hasRightHandGuard: false,
 			isBackwards: false
 		});
@@ -39,7 +37,6 @@ test(t => {
 			leftNumbers: ['0001101', '0110001', '0011001', '0001101', '0001101', '0001101'],
 			rightNumbers: [],
 			hasLeftHandGuard: true,
-			hasCenterGuard: true,
 			hasRightHandGuard: false,
 			isBackwards: false
 		});
@@ -52,7 +49,6 @@ test(t => {
 			leftNumbers: ['0001101', '0110001', '0011001', '0001101', '0001101', '0001101'],
 			rightNumbers: ['1110010', '1100110', '1101100', '1001110', '1100110', '1000100'],
 			hasLeftHandGuard: true,
-			hasCenterGuard: true,
 			hasRightHandGuard: true,
 			isBackwards: true
 		});
@@ -63,7 +59,6 @@ test(t => {
 			leftNumbers: ['0001101', '0110001', '0011001', '0001101', '0001101', '0001101'],
 			rightNumbers: [],
 			hasLeftHandGuard: true,
-			hasCenterGuard: true,
 			hasRightHandGuard: false,
 			isBackwards: true
 		});

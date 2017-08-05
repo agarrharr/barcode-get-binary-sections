@@ -17,41 +17,39 @@ const findAllMatches = (s, search) => {
 	return result;
 }
 
-const binary = string => {
+const getCenterGuardIndex = string => {
 	const centerGuardIndexes = findAllMatches(string, '01010');
-	let hasCenterGuard = false;
-	let centerGuardIndex;
-	for (let i = 0; i < centerGuardIndexes.length; i++) {
-		if (string.slice(0, 3) === '101' && centerGuardIndexes.includes(45)) {
-			hasCenterGuard = true;
-			centerGuardIndex = 45;
-		} else if (string.slice(string.length - 3, string.length) === '101' && centerGuardIndexes.includes(string.length - 50)) {
-			hasCenterGuard = true;
-			centerGuardIndex = string.length - 50;
-		}
-	}
-	if (!hasCenterGuard) {
+	const hasLeft = string.slice(0, 3) === '101';
+	const hasRight = string.slice(string.length - 3, string.length) === '101';
+
+	return (hasLeft && centerGuardIndexes.includes(45)) ?  45 :
+		(hasRight && centerGuardIndexes.includes(string.length - 50)) ?  string.length - 50 : -1;
+}
+
+const getIsBackwards = (string, centerGuardIndex) =>
+	((0 < centerGuardIndex - 7 && isEvenParity(string.slice(centerGuardIndex - 7, centerGuardIndex))) ||
+	(string.length > centerGuardIndex + 11 && !isEvenParity(string.slice(centerGuardIndex + 5, centerGuardIndex + 12))))
+
+const getNumbers = (hasLeftHandGuard, hasRightHandGuard, centerGuardIndex, s) =>
+	s.slice(hasLeftHandGuard ? 3 : 0, centerGuardIndex).concat(s.slice(centerGuardIndex + 5, hasRightHandGuard ? s.length - 3 : s.length)).match(/.{1,7}/g)
+
+const binary = string => {
+	const originalCenterGuardIndex = getCenterGuardIndex(string);
+	if (originalCenterGuardIndex === -1) {
 		return false;
 	}
 
-	const isBackwards = string.length > 3 &&
-		(
-		(0 < centerGuardIndex - 7 && isEvenParity(string.slice(centerGuardIndex - 7, centerGuardIndex))) ||
-			(string.length > centerGuardIndex + 11 && !isEvenParity(string.slice(centerGuardIndex + 5, centerGuardIndex + 12)))
-		)
+	const isBackwards = getIsBackwards(string, originalCenterGuardIndex);
 	const s = isBackwards ? reverseString(string) : string;
-	if (isBackwards) {
-		centerGuardIndex = s.length - centerGuardIndex - 5;
-	}
-	const hasLeftHandGuard = s.slice(0, 3) === '101';
-	const hasRightHandGuard = s.slice(string.length - 3, string.length) === '101';
-	const numbers = s.slice(hasLeftHandGuard ? 3 : 0, centerGuardIndex).concat(s.slice(centerGuardIndex + 5, hasRightHandGuard ? s.length - 3 : s.length)).match(/.{1,7}/g);
+	const centerGuardIndex = isBackwards ? s.length - originalCenterGuardIndex - 5 : originalCenterGuardIndex;
+	const hasLeftHandGuard = s.slice(0, 3) === '101' && centerGuardIndex === 45;
+	const hasRightHandGuard = s.slice(string.length - 3, string.length) === '101' && centerGuardIndex === string.length - 50;
+	const numbers = getNumbers(hasLeftHandGuard, hasRightHandGuard, centerGuardIndex, s);
 
 	return {
 		leftNumbers: numbers ? numbers.slice(0, 6) : [],
 		rightNumbers: numbers ? numbers.slice(6, 12) : [],
-		hasCenterGuard,
-		hasLeftHandGuard: hasLeftHandGuard ? (hasCenterGuard ? centerGuardIndex === 45 : false) : false,
+		hasLeftHandGuard,
 		hasRightHandGuard,
 		isBackwards
 	};
