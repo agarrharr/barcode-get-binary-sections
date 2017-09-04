@@ -1,6 +1,6 @@
 # barcode-get-binary-sections
 
-[![Build Status](https://travis-ci.org/agarrharr/barcode-get-binary-sections.svg?branch=master)](https://travis-ci.org/agarrharr/barcode-get-binary-sectionsid)
+[![Build Status](https://travis-ci.org/agarrharr/barcode-get-binary-sections.svg?branch=master)](https://travis-ci.org/agarrharr/barcode-get-binary-sections)
 
 ## Install
 
